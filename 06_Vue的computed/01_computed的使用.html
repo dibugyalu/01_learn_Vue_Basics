@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <h2>{{firstName + "" + lastName}}</h2>
+    <h2>{{score > 60 ? "及格" : "不及格"}}</h2>
+
+    <!-- 使用计算属性来解决模版中逻辑过重的问题 -->
+    <h2>{{ fullName }}</h2>
+    <h2>{{ scoreComputed }}</h2>
+
+    <!-- 修改计算属性所依赖的值发生了变化会重新进行进行计算 -->
+    <button @click="changeName">修改名字</button>
+
+    <!-- 计算属性是有缓存的 -->
+    <h2>{{ fullName }}</h2>
+    <h2>{{ fullName }}</h2>
+    <h2>{{ fullName }}</h2>
+    <h2>{{ fullNames() }}</h2>
+    <h2>{{ fullNames() }}</h2>
+    <h2>{{ fullNames() }}</h2>
+
+    <!-- 计算属性get和set -->
+    <h2>{{ infos }}</h2>
+    <button @click="changeInfos">修改个人信息</button>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World",
+          firstName: "xiao",
+          lastName: "gengsheng",
+          score: 65,
+          name: "coderbug",
+          age: 18
+        }
+      },
+      computed: {
+        fullName() {
+          return this.firstName + this.lastName
+        },
+        scoreComputed() {
+          console.log("computed")
+          return this.score > 60 ? "及格" : "不及格"
+        },
+        infos: {
+          get() {
+            return this.name + this.age
+          },
+          set(value) {
+            this.age = value
+          }
+        }
+      },
+      methods: {
+        changeName() {
+          this.firstName = "kobe"
+        },
+        fullNames() {
+          console.log("methods")
+          return this.firstName + this.lastName
+        },
+        changeInfos() {
+          this.infos = "coderbug27"
+        }
+       }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

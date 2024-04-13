@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .action {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+  <table border="1" width="500" height="250" v-if="books.length !== 0">
+			<caption>书籍购物车</caption>
+			<tr>
+				<th></th>
+				<th>书籍名称</th>
+				<th>出版日期</th>
+				<th>价格</th>
+        <th>购买数量</th>
+        <th>操作</th>
+			</tr>
+			<tr 
+        v-for="(item, index) of books" 
+        :key="item.id" 
+        :class="{action: index === isShow ? 1 : ''}"
+        @click="actionClick(index)"
+      >
+				<td>{{ item.id }}</td>
+				<td>{{ item.name }}</td>
+        <td>{{ item.date }}</td>
+				<td>￥{{ item.price }}</td>
+				<td><button @click="decreatement(index)" :disabled="item.count == 1 ? true : false">-</button>{{ item.count }}<button @click="increatement(index)">+</button></td>
+        <td><button @click="deleteClick(index)">移除</button></td>
+			</tr>
+	</table>
+  <h2 v-else>您并没有购买任何的书籍</h2>
+    <h2>总价: ￥{{totalCount}} </h2>
+
+  </div>
+ 
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          books: [
+            {id: 1, name: "算法导论", date: "2006-9", price: 85, count: 1},
+            {id: 2, name: "UNIX编程艺术", date: "2006-10", price: 86, count: 1},
+            {id: 3, name: "编程珠玑", date: "2006-11", price: 87, count: 1},
+            {id: 4, name: "代码大全", date: "2006-12", price: 88, count: 1},
+          ],
+          isShow: 0
+        }
+      },
+      methods: {
+        increatement(index) {
+         this.books[index].count += 1
+        },
+        decreatement(index) {
+         this.books[index].count -= 1
+        },
+        deleteClick(index) {
+          this.books.splice(index, 1)
+        },
+        actionClick(index) {
+          this.isShow = index
+        }
+      },
+      computed: {
+        totalCount() {
+          let price = 0
+          for(let item of this.books) {
+            price += item.count * item .price
+          }
+          return price
+        }
+      }
+    })
+    app.mount('#app')
+    
+  </script>
+</body>
+
+</html>

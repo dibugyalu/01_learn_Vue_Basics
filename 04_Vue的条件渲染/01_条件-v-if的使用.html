@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <ul v-if="Object.keys(infos).length > 0">
+      <li v-for="(item, index) in infos" :key="index">{{ item }}</li>
+    </ul>
+    <h2 v-else>没有数据</h2>
+
+    <h2 v-if="score > 87 && score <= 89">及格</h2>
+    <h2 v-else-if="score >= 90 && score < 94">良好</h2>
+    <h3 v-else>优秀</h3>
+    <h1>{{score}}</h1>
+    <button @click="btnClick">+1</button>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World",
+          infos: {},
+          score: 88
+        }
+      },
+      methods: {
+        btnClick() {
+          this.score += 1
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h2 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 1.v-on基本使用 -->
+    <button @click="btnClick">按钮1</button>
+    <button v-on:click="btnClick">按钮1</button>
+
+    <!-- 2.v-on绑定其它事件 -->
+    <h2 @mousemove="btnMove"></h2>
+
+    <!-- 3.v-on绑定多个事件 -->
+    <h2 v-on="{click: btnClick, mousemove: btnMove}"></h2>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World"
+        }
+      },
+     methods: {
+       btnClick() {
+        console.log(1)
+      },
+      btnMove() {
+        console.log(1)
+      }
+     }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

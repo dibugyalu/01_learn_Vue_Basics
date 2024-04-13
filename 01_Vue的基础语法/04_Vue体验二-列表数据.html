@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      template: `
+        <div>
+          <ul>
+            <li v-for="(item, index) of names">{{ item }} - {{ index }}</li>
+          </ul>
+          <ul>
+            <li v-for="(item, index) in information">{{ item}} - {{ index }}</li>
+          </ul>
+        </div>
+      `,
+      data() {
+        return {
+          names: ["coderbug", "kobe", "james"],
+          information: {
+            name: "小明",
+            age: 18,
+            height: 1.88
+          }
+        }
+      }
+    })
+    app.mount("#app")
+  </script>
+</body>
+</html>

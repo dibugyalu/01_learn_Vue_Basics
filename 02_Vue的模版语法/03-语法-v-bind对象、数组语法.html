@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .action {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 1.v-bind基本使用 -->
+    <img v-bind:src="ImgUrl" alt="">
+    <a :href="AUrl">百度</a>
+
+    <!-- 2.三元运算符 -->
+    <h2 :class="isAction ? 'action' : ''" @click="btnclick">嘿嘿</h2>
+
+    <!-- 3.1动态绑定class对象语法 -->
+    <h2 :class="{action: isAction}" @click="btnclick">哈哈哈</h2>
+
+    <!-- 3.2.动态绑定class数组语法 -->
+    <h2 :class="['action']">呵呵</h2>
+
+    <!-- 4.1.动态绑定style对象语法 -->
+    <h2 :style="{'font-size': fontSize, color: 'red'}">呀呀呀</h2>
+
+    <!-- 4.2.动态绑定style数组语法 -->
+    <h2 :style="[{'font-size': fontSize, color: 'red'}]">哼哼哼</h2>
+
+    <!-- 5.动态的绑定一个对象，父组件给子组件传值 -->
+    <h2 name="coderbug" :age="18" :height="1.888">哦哦哦</h2>
+    <h2 v-bind="infos">哦哦哦</h2>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World",
+          ImgUrl: "https://images.pexels.com/photos/9316207/pexels-photo-9316207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          AUrl: "https://www.baidu.com/",
+          isAction: true,
+          fontSize: '20px',
+          infos: {name: "coderbug", age: 18, height: 1.88}
+        }
+      },
+      methods: {
+        btnclick() {
+          this.isAction = !this.isAction
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

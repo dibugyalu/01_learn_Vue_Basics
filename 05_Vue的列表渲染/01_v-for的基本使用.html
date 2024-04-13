@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <ul>
+      <li v-for="(item, index) in movies">{{ index }} - {{ item }}</li>
+    </ul>
+
+    <ul v-for="(item, index) of students">
+      <li>{{ item.name }}</li>
+      <li>{{ item.age }}</li>
+      <li>{{ item.height }}</li>
+      <li>{{ item.id }}</li>
+    </ul>
+
+    <!-- 如果标签没有实际意义可以使用template替换 -->
+    <template v-for="item in students">
+      <h2>{{ item.name }}</h2>
+      <h2>{{ item.age }}</h2>
+      <h2>{{ item.height }}</h2>
+      <h2>{{ item.id }}</h2>
+    </template>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World",
+          movies: ["a", "b", "c", "d"],
+          students: [
+            {name: "coderbug", age: 18, height: 1.88, id: 1},
+            {name: "kobe", age: 19, height: 1.99, id: 2},
+            {name: "jamse", age: 20, height: 2.33, id: 3},
+          ]
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <ul>
+      <li v-for="item of names">{{item}}</li>
+    </ul>
+    <button @click="btnClick">修改数组</button>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          message: "Hello World",
+          names: ["abc", "cba", "nba"]
+        }
+      },
+      methods: {
+        btnClick() {
+          // 1.直接修改原数组
+          // this.names = ["a", "b", "c"]
+
+          // 2.push/pop/shift/unshift/reverse/sort/splice
+
+          // 3.vue3：通过索引的方式修改原数组
+          // this.names[0] = "a"
+
+          // 4.vue2:通过this.$set()
+          // this.$set(this.names, 0, "a")
+
+        }
+       }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
